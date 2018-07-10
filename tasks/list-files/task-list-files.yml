@@ -3,10 +3,11 @@ platform: linux
 
 image_resource:
   type: docker-image
-  source: {repository: ubuntu}
+  source: {repository: busybox}
 
 inputs:
 - name: jmye-resource-git
 
 run:
-  path: jmye-resource-git/tasks/list-files/run.sh
+  path: ls
+  args: [-al]
