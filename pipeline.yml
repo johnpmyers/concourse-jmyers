@@ -5,6 +5,15 @@ resources:
   source: 
     uri: https://github.com/johnpmyers/concourse-jmyers.git
     branch: master
+- name: version
+  type: semver
+  source:
+    driver: s3
+    initial_version: 0.0.1
+    access-key_id: ((aws-access-key-id))
+    secret_access_key: ((aws-secret-access-key))
+    bucket: ((version-aws-bucket))
+    key: version
 
 jobs:
 - name: jmye-list-files
@@ -13,3 +22,11 @@ jobs:
     trigger: true
   - task: task-list-files
     file: jmye-resource-git/tasks/task-list-files.yml
+- name: job-bump-artifact-version
+  plan:
+  - get: jmye-resource-git
+    trigger: true
+    passed: [ jmye-list-files ]
+  - get: version
+  - put: version
+    params: {bump: patch}
