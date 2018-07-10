@@ -1,0 +1,15 @@
+---
+resources:
+- name: jmye-resource-git
+  type: git
+  source: 
+    uri: https://github.com/johnpmyers/concourse-jmyers.git
+    branch: master
+
+jobs:
+- name: jmye-list-files
+  plan:
+  - get: jmye-resource-git
+    trigger: true
+  - task: task-list-files
+    file: jmye-resource-git/tasks/task-list-files.yml
