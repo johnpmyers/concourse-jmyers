@@ -9,5 +9,4 @@ inputs:
 - name: jmye-resource-git
 
 run:
-  path: ls
-  args: [-al]
+  path: jmye-resource-git/tasks/list-files/run.sh

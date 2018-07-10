@@ -13,6 +13,7 @@ resources:
     access-key_id: ((aws-access-key-id))
     secret_access_key: ((aws-secret-access-key))
     bucket: ((version-aws-bucket))
+    region_name: us-east-1
     key: version
 
 jobs:
@@ -21,12 +22,14 @@ jobs:
   - get: jmye-resource-git
     trigger: true
   - task: task-list-files
-    file: jmye-resource-git/tasks/task-list-files.yml
+    file: jmye-resource-git/tasks/list-files/task-list-files.yml
 - name: job-bump-artifact-version
   plan:
   - get: jmye-resource-git
     trigger: true
     passed: [ jmye-list-files ]
   - get: version
+  - task: task-display-version
+    file: jmye-resource-git/tasks/display-version/task-display-version.yml
   - put: version
     params: {bump: patch}

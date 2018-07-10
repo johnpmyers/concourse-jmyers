@@ -1,0 +1,13 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source: {repository: busybox}
+
+inputs:
+- name: jmye-resource-git
+- name: version
+
+run:
+  path: jmye-resource-git/tasks/display-version/run.sh
