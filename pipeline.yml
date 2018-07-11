@@ -10,9 +10,9 @@ resources:
   source:
     driver: s3
     initial_version: 0.0.1
-    access-key_id: ((aws-access-key-id))
-    secret_access_key: ((aws-secret-access-key))
-    bucket: ((version-aws-bucket))
+    access-key_id: ((aws_access_key_id))
+    secret_access_key: ((aws_secret_access_key))
+    bucket: ((version_aws_bucket))
     region_name: us-east-1
     key: version
 
